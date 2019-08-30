@@ -1,16 +1,16 @@
 language: python
-sudo: false
+sudo: false # Use container-based infrastructure
 
 env:
   global:
     - LUAROCKS=2.4.4
   matrix:
-    - LUA: "lua 5.1"
-    - LUA: "lua 5.2"
-    - LUA: "lua 5.3"
-    - LUA: "luajit" # latest stable version (2.0.4)
-    - LUA: "luajit 2.0"
-    - LUA: "luajit 2.1"
+    - LUA="lua 5.1"
+    - LUA="lua 5.2"
+    - LUA="lua 5.3"
+    - LUA="luajit" # latest stable version (2.0.4)
+    - LUA="luajit 2.0"
+    - LUA="luajit 2.1"
 
 branches:
   only:
