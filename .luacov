@@ -1,0 +1,11 @@
+--- Global configuration file. Copy, customize and store in your
+-- project folder as '.luacov' for project specific configuration
+-- @class module
+-- @name luacov.defaults
+return {
+ ['exclude'] = {
+    -- Exclude the test runner and tests themselves
+   'test$',
+   'test/util/tester$'
+ }
+}
