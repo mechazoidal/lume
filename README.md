@@ -1,5 +1,9 @@
 # Lume
 
+[![Build Status](https://travis-ci.org/mechazoidal/lume.svg?branch=master)](https://travis-ci.org/mechazoidal/lume)
+
+[![Coverage Status](https://coveralls.io/repos/github/mechazoidal/lume/badge.svg?branch=build_pipeline)](https://coveralls.io/github/mechazoidal/lume?branch=build_pipeline)
+
 A collection of functions for Lua, geared towards game development.
 
 
