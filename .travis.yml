@@ -2,6 +2,8 @@ language: c
 sudo: false
 
 env:
+  global:
+    - LUAROCKS=2.4.4
   matrix:
     - LUA=lua5.1
     - LUA=lua5.2
@@ -14,7 +16,13 @@ branches:
   only:
     - property_testing
 
+before_install:
+  - luarocks install luacov
+  - luarocks install luacheck
+  - luarocks install luacov-coveralls
 
 script:
-  - cd test
-  - lua test.lua
+  - make test
+
+after_success:
+  -make coverage
