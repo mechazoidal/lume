@@ -1,5 +1,8 @@
 --- A collection of functions for Lua, geared towards game development.
 -- @module lume
+-- @author rxi
+-- @copyright 2018
+-- @license MIT
 
 -- Copyright (c) 2018 rxi
 --
@@ -111,7 +114,8 @@ end
 --- Returns `1` if `x` is 0 or above, returns `-1` when `x` is negative.
 -- @function sign
 -- @tparam number x
--- @treturn number (a boolean?)
+-- @return 1 if `x` >= 0
+-- @return 0 if `x` < 0
 function lume.sign(x)
   return x < 0 and -1 or 1
 end
@@ -161,7 +165,8 @@ end
 -- @tparam number x2
 -- @tparam number y2
 -- @tparam[opt] bool squared
--- @treturn number
+-- @treturn number distance between (`x1`,`y1`) and (`x2`,`y2`)
+-- @treturn number squared distance between (`x1`,`y1`) and (`x2`,`y2`), if `squared` is true
 function lume.distance(x1, y1, x2, y2, squared)
   local dx = x1 - x2
   local dy = y1 - y2
@@ -183,7 +188,7 @@ end
 
 
 --- Given an `angle` and `magnitude`, returns a vector.
--- @function lerp
+-- @function vector
 -- @tparam number angle
 -- @tparam number magnitude
 -- @treturn number
@@ -193,7 +198,7 @@ function lume.vector(angle, magnitude)
 end
 
 
---- Random / Choosing
+--- Random
 -- @section random
 
 --- Returns a random number between `a` and `b`. If only `a` is supplied a number between `0` and `a` is returned.
@@ -201,7 +206,9 @@ end
 -- @function random
 -- @tparam[opt] number a
 -- @tparam[opt] number b
--- @treturn number
+-- @treturn number Random number between 0 and 1
+-- @treturn number Random number between 0 and `b`
+-- @treturn number Random number between `a` and `b`
 function lume.random(a, b)
   if not a then a, b = 0, 1 end
   if not b then b = 0 end
@@ -244,12 +251,11 @@ function lume.weightedchoice(t)
 end
 
 
---- Array / Tables
--- @section array_tables
+--- Tables
+-- @section tables
 
 --- Returns `true` if `x` is an array -- the value is assumed to be an array if it is a table which contains a value at the index `1`. 
 -- This function is used internally and can be overridden if you wish to use a different method to detect arrays.
--- FIXME not being detected?
 -- @function isarray
 -- @tparam table x
 -- @treturn bool
@@ -263,7 +269,8 @@ end
 -- @tparam table t
 -- @param ... arguments
 -- @treturn table
--- @usage local t = { 1, 2, 3 }; lume.push(t, 4, 5) -- `t` becomes { 1, 2, 3, 4, 5 }
+-- @usage local t = { 1, 2, 3 }
+--lume.push(t, 4, 5) -- `t` becomes { 1, 2, 3, 4, 5 }
 function lume.push(t, ...)
   local n = select("#", ...)
   for i = 1, n do
@@ -276,9 +283,10 @@ end
 --- Removes the first instance of the value `x` if it exists in the table `t`.
 -- @function remove
 -- @tparam table t
--- @param x
--- @return x
--- @usage local t = { 1, 2, 3 }; lume.remove(t, 2) -- `t` becomes { 1, 3 }
+-- @param x value
+-- @treturn table updated table
+-- @usage local t = { 1, 2, 3 }
+--lume.remove(t, 2) -- `t` becomes { 1, 3 }
 function lume.remove(t, x)
   local iter = getiter(t)
   for i, v in iter(t) do
@@ -300,6 +308,8 @@ end
 -- @function clear
 -- @tparam table t
 -- @return t
+-- @usage local t = { 1, 2, 3 }
+--lume.clear(t) -- `t` becomes {}
 function lume.clear(t)
   local iter = getiter(t)
   for k in iter(t) do
@@ -314,7 +324,8 @@ end
 -- @tparam table t
 -- @param ... arguments
 -- @treturn table Updated table
--- @usage local t = { a = 1, b = 2 }; lume.extend(t, { b = 4, c = 6 }) -- `t` becomes { a = 1, b = 4, c = 6 }
+-- @usage local t = { a = 1, b = 2 }
+--lume.extend(t, { b = 4, c = 6 }) -- `t` becomes { a = 1, b = 4, c = 6 }
 function lume.extend(t, ...)
   for i = 1, select("#", ...) do
     local x = select(i, ...)
@@ -352,6 +363,9 @@ end
 -- @tparam array t
 -- @tparam[opt] func|string comp
 -- @treturn array t
+-- @usage lume.sort({ 1, 4, 3, 2, 5 }) -- Returns { 1, 2, 3, 4, 5 }
+-- @usage lume.sort({ {z=2}, {z=3}, {z=1} }, "z") -- Returns { {z=1}, {z=2}, {z=3} }
+-- @usage lume.sort({ 1, 3, 2 }, function(a, b) return a > b end) -- Returns { 3, 2, 1 }
 function lume.sort(t, comp)
   local rtn = lume.clone(t)
   if comp then
@@ -734,7 +748,8 @@ end
 -- @tparam function fn
 -- @param ... arguments
 -- @treturn func
--- @usage local f = lume.fn(print, "Hello"); f("world") -- Prints "Hello world"
+-- @usage local f = lume.fn(print, "Hello")
+--f("world") -- Prints "Hello world"
 function lume.fn(fn, ...)
   assert(iscallable(fn), "expected a function as the first argument")
   local args = { ... }
@@ -746,14 +761,13 @@ end
 
 
 --- Returns a wrapper function to `fn` which takes the supplied arguments. The wrapper function will call `fn` on the first call and do nothing on any subsequent calls.
--- FIXME multi-line usage?
--- local f = lume.once(print, "Hello")
--- f() -- Prints "Hello"
--- f() -- Does nothing
 -- @function once
 -- @tparam function fn
 -- @param ... arguments
 -- @treturn func
+-- @usage local f = lume.once(print, "Hello")
+--f() -- Prints "Hello"
+--f() -- Does nothing
 function lume.once(fn, ...)
   local f = lume.fn(fn, ...)
   local done = false
@@ -788,13 +802,12 @@ end
 
 
 --- Creates a wrapper function which calls each supplied argument in the order they were passed to `lume.combine()`; nil arguments are ignored. The wrapper function passes its own arguments to each of its wrapped functions when it is called.
--- FIXME multiline
---local f = lume.combine(function(a, b) print(a + b) end,
-                       --function(a, b) print(a * b) end)
---f(3, 4) -- Prints "7" then "12" on a new line
 -- @function combine
 -- @param ... arguments
 -- @treturn function wrapper function
+-- @usage local f = lume.combine(function(a, b) print(a + b) end,
+--                        function(a, b) print(a * b) end)
+-- f(3, 4) -- Prints "7" then "12" on a new line
 function lume.combine(...)
   local n = select('#', ...)
   if n == 0 then return noop end
@@ -835,12 +848,11 @@ end
 local lambda_cache = {}
 
 --- Takes a string lambda and returns a function. `str` should be a list of comma-separated parameters, followed by `->`, followed by the expression which will be evaluated and returned.
--- FIXME multiline
---local f = lume.lambda "x,y -> 2*x+y"
---f(10, 5) -- Returns 25
 -- @function lambda
 -- @tparam string str list of comma-separate parameters
 -- @treturn func
+-- @usage local f = lume.lambda "x,y -> 2*x+y"
+--f(10, 5) -- Returns 25
 function lume.lambda(str)
   if not lambda_cache[str] then
     local args, body = str:match([[^([%w,_ ]-)%->(.-)$]])
@@ -893,7 +905,8 @@ end
 -- @tparam bool|number|table|string x
 -- @treturn string serialized string
 -- @see deserialize
--- @usage lume.serialize({a = "test", b = {1, 2, 3}, false}) -- Returns "{[1]=false,["a"]="test",["b"]={[1]=1,[2]=2,[3]=3,},}"
+-- @usage lume.serialize({a = "test", b = {1, 2, 3}, false})
+-- -- Returns "{[1]=false,["a"]="test",["b"]={[1]=1,[2]=2,[3]=3,},}"
 function lume.serialize(x)
   return serialize(x)
 end
@@ -944,9 +957,10 @@ end
 --- Returns `str` wrapped to `limit` number of characters per line, by default `limit` is `72`. `limit` can also be a function which when passed a string, returns `true` if it is too long for a single line.
 -- @function wordwrap
 -- @tparam string str
--- @tparam[opt] number|function limit
+-- @tparam[opt=72] number|function limit 
 -- @treturn string wrapped string
--- @usage lume.wordwrap("Hello world. This is a short string", 14) -- Returns "Hello world\nThis is a\nshort string"
+-- @usage lume.wordwrap("Hello world. This is a short string", 14)
+-- -- Returns "Hello world\nThis is a\nshort string"
 function lume.wordwrap(str, limit)
   limit = limit or 72
   local check
@@ -1016,7 +1030,8 @@ end
 -- @function trace
 -- @param ... arguments
 -- @treturn string current filename, line number, and arguments
--- @usage lume.trace("hello", 1234) -- Prints "example.lua:12: hello 1234" inside of the "example.lua" file
+-- @usage -- Assuming the file is called "example.lua" and the next line is 12:
+--lume.trace("hello", 1234) -- Prints "example.lua:12: hello 1234"
 function lume.trace(...)
   local info = debug.getinfo(2, "Sl")
   local t = { info.short_src .. ":" .. info.currentline .. ":" }
@@ -1058,6 +1073,7 @@ end
 -- @function hotswap
 -- @tparam module modname
 -- @treturn module
+-- @treturn nil,string If an error occurs
 -- @usage lume.hotswap("lume") -- Reloads the lume module
 -- @usage assert(lume.hotswap("inexistant_module")) -- Raises an error
 function lume.hotswap(modname)
@@ -1108,13 +1124,16 @@ end
 -- @function ripairs
 -- @tparam function t
 -- @treturn function
+-- @usage -- Prints "3->c", "2->b" and "1->a" on separate lines
+-- for i, v in lume.ripairs({ "a", "b", "c" }) do
+--   print(i .. "->" .. v)
+-- end
 function lume.ripairs(t)
   return ripairs_iter, t, (#t + 1)
 end
 
 
 --- Takes color string `str` and returns 4 values, one for each color channel (`r`, `g`, `b` and `a`). By default the returned values are between 0 and 1; the values are multiplied by the number `mul` if it is provided.
--- FIXME multiple returns
 -- @function color
 -- @tparam string str
 -- @tparam[opt] number mul
@@ -1157,7 +1176,10 @@ chain_mt.__index.result = function(x) return x._value end
 
 --- Returns a wrapped object which allows chaining of lume functions. The function result() should be called at the end of the chain to return the resulting value.
 -- The table returned by the `lume` module, when called, acts in the same manner as calling chain().
--- @usage lume.chain({1, 2, 3, 4}); :filter(function(x) return x % 2 == 0 end); :map(function(x) return -x end); :result() -- Returns { -2, -4 }
+-- @usage lume.chain({1, 2, 3, 4})
+--   :filter(function(x) return x % 2 == 0 end)
+--   :map(function(x) return -x end)
+--   :result() -- Returns { -2, -4 }
 -- @usage lume({1, 2, 3}):each(print) -- Prints 1, 2 then 3 on separate lines
 -- @function chain
 -- @tparam table value
