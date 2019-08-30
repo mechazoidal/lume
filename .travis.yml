@@ -5,12 +5,12 @@ env:
   global:
     - LUAROCKS=2.4.4
   matrix:
-    - LUA=lua5.1
-    - LUA=lua5.2
-    - LUA=lua5.3
+    - LUA=lua 5.1
+    - LUA=lua 5.2
+    - LUA=lua 5.3
     - LUA=luajit     # latest stable version (2.0.4)
-    - LUA=luajit2.0  # current head of 2.0 branch
-    - LUA=luajit2.1  # current head of 2.1 branch
+    - LUA=luajit 2.0  # current head of 2.0 branch
+    - LUA=luajit 2.1  # current head of 2.1 branch
 
 branches:
   only:
@@ -18,7 +18,7 @@ branches:
 
 before_install:
   - pip install hererocks
-  - hererocks lua_install -r^ --$LUA
+  - hererocks lua_install --luarocks $LUAROCKS --$LUA
   - export PATH=$PATH:$PWD/lua_install/bin
 
 install:
