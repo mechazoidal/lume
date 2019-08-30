@@ -11,7 +11,7 @@ env:
 
 branches:
   only:
-    - property_testing
+    - build_pipeline
 
 before_install:
   - pip install hererocks
