@@ -622,3 +622,8 @@ end
 tester.dotests(tests)
 tester.test.global()
 tester.printresults()
+
+-- If any test failed, the overall run is a failure
+if tester.failcount > 0 then 
+  os.exit(1)
+end
