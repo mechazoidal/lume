@@ -1,0 +1,30 @@
+language: python
+sudo: false # Use container-based infrastructure
+
+env:
+  matrix:
+    - LUA="lua 5.1"
+    - LUA="lua 5.2"
+    - LUA="lua 5.3"
+    - LUA="luajit 2.0" # latest stable in 2.0 series
+    - LUA="luajit 2.1" # latest beta in 2.1 series
+
+branches:
+  only:
+    - property_testing
+
+before_install:
+  - pip install hererocks
+  - hererocks env --$LUA -rlatest
+  - source env/bin/activate
+
+install:
+  - luarocks install luacov
+  - luarocks install luacheck
+  - luarocks install luacov-coveralls
+
+script:
+  - make test
+
+after_success:
+  -make coverage
