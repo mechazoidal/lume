@@ -19,7 +19,7 @@ branches:
 before_install:
   - pip install hererocks
   - hererocks lua_install --$LUA -rlatest
-  - source env/bin/activate
+  - export PATH=$PATH:$PWD/lua_install/bin
 
 install:
   - luarocks install luacov
