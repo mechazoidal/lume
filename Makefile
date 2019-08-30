@@ -32,7 +32,7 @@ lint: lume.lua
 	luacheck lume.lua
 
 coverage: luacov.report.out
-	luacov-coveralls --dryrun
+	luacov-coveralls
 
 doc/index.html: $(SOURCES)
 	ldoc $?
