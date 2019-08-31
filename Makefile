@@ -1,8 +1,14 @@
-# Luarocks github release tags are always "v.[major].[minor].[revision]"
-VERSION=$(subst v,,$(sort $(shell git describe --abbrev=0 --tags)))
+# Luarocks github release tags are always "v[major].[minor].[revision]"
+GIT_VERSION=$(subst v,,$(sort $(shell git describe --abbrev=0 --tags)))
+# Split it again into a space-delimited string to use it as a list
+VERSION_WORDS=$(subst ., ,$(GIT_VERSION))
+# Split off each of the three major components
+VERSION_MAJOR=$(word 1, $(VERSION_WORDS))
+VERSION_MINOR=$(word 2, $(VERSION_WORDS))
+VERSION_PATCH=$(word 3, $(VERSION_WORDS))
 # TODO Ideally this would increment based on detecting previous rockspecs
 ROCKSPEC_REVISION=0
-ROCKSPEC_VERSION=$(VERSION)-$(ROCKSPEC_REVISION)
+ROCKSPEC_VERSION=$(VERSION_MAJOR).$(VERSION_MINOR).$(VERSION_PATCH)-$(ROCKSPEC_REVISION)
 
 SOURCES=lume.lua
 TEST_PACKAGE_PATH='package.path = "./test/?.lua;./test/util/?.lua;" .. package.path'
@@ -40,12 +46,16 @@ docs: doc/index.html
 CHANGELOG.md: 
 	git log --pretty=%s --first-parent | awk 'BEGIN { print "# CHANGELOG"; tracked=0 } /^Version/ { tracked=1; print "## " $$0; } { if ($$0 !~ /^Version/ && tracked==1 ) { print "  - " $$0 } }' > CHANGELOG.md
 
-rock: rockspecs/lume-$(ROCKSPEC_VERSION).rockspec
+# Generate a new rockspec by copying the previous one
+# TODO 'find' may not be a stable sort between platforms
+rockspecs/lume-$(ROCKSPEC_VERSION).rockspec:
+	sed -E -e 's/^version.+/version = "$(ROCKSPEC_VERSION)"/' -e 's/tag = .+/tag = "$(FAKE_GIT_VERSION)"/' $$(find rockspecs -name "lume*.rockspec" | tail -n1) > $@
+
+rock: rockspecs/lume-$(ROCKSPEC_VERSION).rockspec 
 	luarocks pack $?
 
 release: lint docs CHANGELOG.md
 
-# Note that this target will never succeed without a Luarocks API key; it is beyond the scope of the assignment.
-upload: rock
-	luarocks upload rockspecs/lume-$(ROCKSPEC_VERSION).rockspec 
+upload: rock 
+	luarocks upload rockspecs/lume-$(ROCKSPEC_VERSION).rockspec --api-key=$(LUAROCKS_API_KEY)
 
