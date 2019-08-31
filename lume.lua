@@ -81,7 +81,7 @@ local iteratee = function(x)
 end
 
 
---- Math 
+--- Math
 -- @section math
 
 --- Returns the number `x` clamped between the numbers `min` and `max`.
@@ -255,7 +255,8 @@ end
 -- @section tables
 
 
---- Returns `true` if `x` is an array. The value `x` is assumed to be an array if it is a table which contains a value at the index `1`.
+--- Returns `true` if `x` is an array.
+-- The value `x` is assumed to be an array if it is a table which contains a value at the index `1`.
 --
 -- This function is used internally and can be overridden if you wish to use a different method to detect arrays.
 -- @function isarray
@@ -321,7 +322,8 @@ function lume.clear(t)
 end
 
 
---- Copies all the fields from the source tables to the table `t` and returns `t`. If a key exists in multiple tables the right-most table's value is used.
+--- Copies all the fields from the source tables to the table `t` and returns `t`.
+-- If a key exists in multiple tables the right-most table's value is used.
 -- @function extend
 -- @tparam table t
 -- @param ... arguments
@@ -395,7 +397,8 @@ function lume.array(...)
 end
 
 
---- Iterates the table `t` and calls the function `fn` on each value followed by the supplied additional arguments; if `fn` is a string the method of that name is called for each value. The function returns `t` unmodified.
+--- Iterates the table `t` and calls the function `fn` on each value followed by the supplied additional arguments
+-- If `fn` is a string the method of that name is called for each value. The function returns `t` unmodified.
 -- @function each
 -- @tparam table t
 -- @tparam func|string fn
@@ -429,7 +432,8 @@ function lume.map(t, fn)
 end
 
 
---- Returns true if all the values in `t` table are true. If a `fn` function is supplied it is called on each value, true is returned if all of the calls to `fn` return true.
+--- Returns true if all the values in `t` table are true. If a `fn` function is supplied it is called on each value,
+-- true is returned if all of the calls to `fn` return true.
 -- @function all
 -- @tparam table t
 -- @tparam[opt] function fn
@@ -444,7 +448,8 @@ function lume.all(t, fn)
   return true
 end
 
---- Returns true if any of the values in `t` table are true. If a `fn` function is supplied it is called on each value, true is returned if any of the calls to `fn` return true.
+--- Returns true if any of the values in `t` table are true. If a `fn` function is supplied it is called on each value,
+-- true is returned if any of the calls to `fn` return true.
 -- @function any
 -- @tparam table t
 -- @tparam[opt] function fn
@@ -460,7 +465,9 @@ function lume.any(t, fn)
 end
 
 
---- Applies `fn` on two arguments cumulative to the items of the array `t`, from left to right, so as to reduce the array to a single value. If a `first` value is specified the accumulator is initialised to this, otherwise the first value in the array is used. If the array is empty and no `first` value is specified an error is raised.
+--- Applies `fn` on two arguments cumulative to the items of the array `t`, from left to right, so as to reduce the
+-- array to a single value. If a `first` value is specified the accumulator is initialised to this, otherwise
+-- the first value in the array is used. If the array is empty and no `first` value is specified an error is raised.
 -- @function reduce
 -- @tparam table t
 -- @tparam function fn
@@ -498,7 +505,8 @@ function lume.unique(t)
 end
 
 
---- Calls `fn` on each value of `t` table. Returns a new table with only the values where `fn` returned true. If `retainkeys` is true the table is not treated as an array and retains its original keys.
+--- Calls `fn` on each value of `t` table. Returns a new table with only the values where `fn` returned true.
+-- If `retainkeys` is true the table is not treated as an array and retains its original keys.
 -- @function filter
 -- @tparam table t
 -- @tparam function fn
@@ -523,7 +531,9 @@ function lume.filter(t, fn, retainkeys)
 end
 
 
---- The opposite of `lume.filter()`: Calls `fn` on each value of `t` table; returns a new table with only the values where `fn` returned false. If `retainkeys` is true the table is not treated as an array and retains its original keys.
+--- The opposite of `lume.filter()`: Calls `fn` on each value of `t` table; returns a new table with only
+-- the values where `fn` returned false.
+-- If `retainkeys` is true the table is not treated as an array and retains its original keys.
 -- @see filter
 -- @function reject
 -- @tparam table t
@@ -548,7 +558,8 @@ function lume.reject(t, fn, retainkeys)
 end
 
 
---- Returns a new table with all the given tables merged together. If a key exists in multiple tables the right-most table's value is used.
+--- Returns a new table with all the given tables merged together.
+-- If a key exists in multiple tables the right-most table's value is used.
 -- @function merge
 -- @param ... arguments
 -- @treturn table
@@ -591,7 +602,7 @@ end
 -- @tparam table t
 -- @param value
 -- @return index/key
--- @treturn[opt] nil 
+-- @treturn[opt] nil
 -- @usage lume.find({"a", "b", "c"}, "b") -- Returns 2
 function lume.find(t, value)
   local iter = getiter(t)
@@ -602,12 +613,13 @@ function lume.find(t, value)
 end
 
 
---- Returns the value and key of the value in table `t` which returns true when `fn` is called on it. Returns `nil` if no such value exists.
+--- Returns the value and key of the value in table `t` which returns true when `fn` is called on it.
+-- Returns `nil` if no such value exists.
 -- @function match
 -- @tparam table t
 -- @tparam function fn
 -- @return index/key
--- @treturn[opt] nil 
+-- @treturn[opt] nil
 -- @usage lume.match({1, 5, 8, 7}, function(x) return x % 2 == 0 end) -- Returns 8, 3
 function lume.match(t, fn)
   fn = iteratee(fn)
@@ -619,7 +631,8 @@ function lume.match(t, fn)
 end
 
 
---- Counts the number of values in the table `t`. If a `fn` function is supplied it is called on each value, the number of times it returns true is counted.
+--- Counts the number of values in the table `t`. If a `fn` function is supplied it is called on each value,
+-- the number of times it returns true is counted.
 -- @function count
 -- @tparam table t
 -- @tparam[opt] function fn
@@ -644,7 +657,8 @@ function lume.count(t, fn)
 end
 
 
---- Mimics the behaviour of Lua's `string.sub`, but operates on an array rather than a string. Creates and returns a new array of the given slice.
+--- Mimics the behaviour of Lua's `string.sub`, but operates on an array rather than a string.
+-- Creates and returns a new array of the given slice.
 -- @function slice
 -- @tparam table t
 -- @tparam[opt] number i
@@ -663,7 +677,8 @@ function lume.slice(t, i, j)
 end
 
 
---- Returns the first element of an array or nil if the array is empty. If `n` is specified an array of the first `n` elements is returned.
+--- Returns the first element of an array or nil if the array is empty.
+-- If `n` is specified an array of the first `n` elements is returned.
 -- @function first
 -- @tparam table t
 -- @tparam[opt] number n
@@ -677,7 +692,8 @@ function lume.first(t, n)
 end
 
 
---- Returns the last element of an array or nil if the array is empty. If `n` is specified an array of the last `n` elements is returned.
+--- Returns the last element of an array or nil if the array is empty.
+-- If `n` is specified an array of the last `n` elements is returned.
 -- @function last
 -- @tparam table t
 -- @tparam[opt] number n
@@ -745,7 +761,9 @@ end
 --- Higher-order functions
 -- @section function
 
---- Creates a wrapper function around function `fn`, automatically inserting the arguments into `fn` which will persist every time the wrapper is called. Any arguments which are passed to the returned function will be inserted after the already existing arguments passed to `fn`.
+--- Creates a wrapper function around function `fn`, automatically inserting the arguments into `fn` which will
+-- persist every time the wrapper is called. Any arguments which are passed to the returned function will be
+-- inserted after the already existing arguments passed to `fn`.
 -- @function fn
 -- @tparam function fn
 -- @param ... arguments
@@ -762,7 +780,8 @@ function lume.fn(fn, ...)
 end
 
 
---- Returns a wrapper function to `fn` which takes the supplied arguments. The wrapper function will call `fn` on the first call and do nothing on any subsequent calls.
+--- Returns a wrapper function to `fn` which takes the supplied arguments. The wrapper function will call `fn` on
+-- the first call and do nothing on any subsequent calls.
 -- @function once
 -- @tparam function fn
 -- @param ... arguments
@@ -784,7 +803,8 @@ end
 local memoize_fnkey = {}
 local memoize_nil = {}
 
---- Returns a wrapper function to `fn` where the results for any given set of arguments are cached. `lume.memoize()` is useful when used on functions with slow-running computations.
+--- Returns a wrapper function to `fn` where the results for any given set of arguments are cached.
+-- `lume.memoize()` is useful when used on functions with slow-running computations.
 -- @function memoize
 -- @tparam function fn
 -- @treturn func
@@ -803,7 +823,9 @@ function lume.memoize(fn)
 end
 
 
---- Creates a wrapper function which calls each supplied argument in the order they were passed to `lume.combine()`; nil arguments are ignored. The wrapper function passes its own arguments to each of its wrapped functions when it is called.
+--- Creates a wrapper function which calls each supplied argument in the order they were passed to `lume.combine()`;
+-- nil arguments are ignored. The wrapper function passes its own arguments to each of its wrapped functions
+-- when it is called.
 -- @function combine
 -- @param ... arguments
 -- @treturn function wrapper function
@@ -833,7 +855,8 @@ function lume.combine(...)
 end
 
 
---- Calls the given function with the provided arguments and returns its values. If `fn` is `nil` then no action is performed and the function returns `nil`.
+--- Calls the given function with the provided arguments and returns its values. If `fn` is `nil` then
+-- no action is performed and the function returns `nil`.
 -- @function call
 -- @tparam function fn
 -- @param ... arguments
@@ -849,7 +872,8 @@ end
 
 local lambda_cache = {}
 
---- Takes a string lambda and returns a function. `str` should be a list of comma-separated parameters, followed by `->`, followed by the expression which will be evaluated and returned.
+--- Takes a string lambda and returns a function. `str` should be a list of comma-separated parameters,
+-- followed by `->`, followed by the expression which will be evaluated and returned.
 -- @function lambda
 -- @tparam string str list of comma-separate parameters
 -- @treturn func
@@ -899,10 +923,12 @@ serialize = function(x, stk)
   return serialize_map[type(x)](x, stk)
 end
 
---- String 
+--- String
 -- @section string
 
---- Serializes the argument `x` into a string which can be loaded again using `lume.deserialize()`. Only booleans, numbers, tables and strings can be serialized. Circular references will result in an error; all nested tables areserialized as unique tables.
+--- Serializes the argument `x` into a string which can be loaded again using `lume.deserialize()`. Only booleans,
+-- numbers, tables and strings can be serialized. Circular references will result in an error;
+-- all nested tables are serialized as unique tables.
 -- @function serialize
 -- @tparam bool|number|table|string x
 -- @treturn string serialized string
@@ -914,7 +940,8 @@ function lume.serialize(x)
 end
 
 
---- Deserializes a string created by `lume.serialize()` and returns the resulting value. This function should not be run on an untrusted string.
+--- Deserializes a string created by `lume.serialize()` and returns the resulting value. This function should not
+-- be run on an untrusted string.
 -- @function deserialize
 -- @tparam string str
 -- @return ... resulting value
@@ -925,7 +952,8 @@ function lume.deserialize(str)
 end
 
 
---- Returns an array of the words in the string `str`. If `sep` is provided it is used as the delimiter, consecutive delimiters are not grouped together and will delimit empty strings.
+--- Returns an array of the words in the string `str`. If `sep` is provided it is used as the delimiter,
+-- consecutive delimiters are not grouped together and will delimit empty strings.
 -- @function split
 -- @tparam string str
 -- @tparam[opt] string sep
@@ -943,7 +971,8 @@ function lume.split(str, sep)
 end
 
 
---- Trims the whitespace from the start and end of the string `str` and returns the new string. If a `chars` value is set the characters in `chars` are trimmed instead of whitespace.
+--- Trims the whitespace from the start and end of the string `str` and returns the new string. If a `chars` value is
+-- set the characters in `chars` are trimmed instead of whitespace.
 -- @function trim
 -- @tparam string str
 -- @tparam[opt] string chars
@@ -956,10 +985,11 @@ function lume.trim(str, chars)
 end
 
 
---- Returns `str` wrapped to `limit` number of characters per line, by default `limit` is `72`. `limit` can also be a function which when passed a string, returns `true` if it is too long for a single line.
+--- Returns `str` wrapped to `limit` number of characters per line, by default `limit` is `72`. `limit` can also be a
+-- function which when passed a string, returns `true` if it is too long for a single line.
 -- @function wordwrap
 -- @tparam string str
--- @tparam[opt=72] number|function limit 
+-- @tparam[opt=72] number|function limit
 -- @treturn string wrapped string
 -- @usage lume.wordwrap("Hello world. This is a short string", 14)
 -- -- Returns "Hello world\nThis is a\nshort string"
@@ -995,7 +1025,8 @@ function lume.wordwrap(str, limit)
 end
 
 
---- Returns a formatted string. The values of keys in the table `vars` can be inserted into the string by using the form `"{key}"` in `str`; numerical keys can also be used.
+--- Returns a formatted string. The values of keys in the table `vars` can be inserted into the string by using
+-- the form `"{key}"` in `str`; numerical keys can also be used.
 -- @function format
 -- @tparam string str
 -- @tparam[opt] table vars
@@ -1014,7 +1045,8 @@ end
 --- Miscellaneous
 -- @section misc
 
---- Inserts the arguments into function `fn` and calls it. Returns the time in seconds the function `fn` took to execute followed by `fn`'s returned values.
+--- Inserts the arguments into function `fn` and calls it. Returns the time in seconds the function `fn` took
+-- to execute followed by `fn`'s returned values.
 -- @function time
 -- @tparam function fn
 -- @param ... arguments
@@ -1070,7 +1102,8 @@ function lume.uuid()
 end
 
 
---- Reloads an already loaded module in place, allowing you to immediately see the effects of code changes without having to restart the program. `modname` should be the same string used when loading the module with require().
+--- Reloads an already loaded module in place, allowing you to immediately see the effects of code changes without
+-- having to restart the program. `modname` should be the same string used when loading the module with require().
 -- In the case of an error the global environment is restored and `nil` plus an error message is returned.
 -- @function hotswap
 -- @tparam module modname
@@ -1122,7 +1155,8 @@ local ripairs_iter = function(t, i)
   end
 end
 
---- Performs the same function as `ipairs()` but iterates in reverse; this allows the removal of items from the table during iteration without any items being skipped.
+--- Performs the same function as `ipairs()` but iterates in reverse; this allows the removal of items from the table
+-- during iteration without any items being skipped.
 -- @function ripairs
 -- @tparam function t
 -- @treturn function
@@ -1135,7 +1169,8 @@ function lume.ripairs(t)
 end
 
 
---- Takes color string `str` and returns 4 values, one for each color channel (`r`, `g`, `b` and `a`). By default the returned values are between 0 and 1; the values are multiplied by the number `mul` if it is provided.
+--- Takes color string `str` and returns 4 values, one for each color channel (`r`, `g`, `b` and `a`). By default the
+-- returned values are between 0 and 1; the values are multiplied by the number `mul` if it is provided.
 -- @function color
 -- @tparam string str
 -- @tparam[opt] number mul
@@ -1176,7 +1211,8 @@ chain_mt.__index = lume.map(lume.filter(lume, iscallable, true),
   end)
 chain_mt.__index.result = function(x) return x._value end
 
---- Returns a wrapped object which allows chaining of lume functions. The function result() should be called at the end of the chain to return the resulting value.
+--- Returns a wrapped object which allows chaining of lume functions. The function result() should be called
+-- at the end of the chain to return the resulting value.
 -- The table returned by the `lume` module, when called, acts in the same manner as calling chain().
 -- @usage lume.chain({1, 2, 3, 4})
 --   :filter(function(x) return x % 2 == 0 end)
