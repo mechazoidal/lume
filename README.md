@@ -19,7 +19,7 @@ lume = require "lume"
 
 ## Usage
 
-[LDoc documentation](https://mechazoidal.github.io/lume/index.html)
+[LDoc documentation](https://mechazoidal.github.io/lume/docs/index.html)
 
 ## License
 
