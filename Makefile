@@ -14,10 +14,10 @@ SOURCES=lume.lua
 TEST_PACKAGE_PATH='package.path = "./test/?.lua;./test/util/?.lua;" .. package.path'
 .PHONY: all clean test coverage lint
 
-all: release
+all: test lint
 
-install:
-	luarocks make lume-$(ROCK_VERSION).rockspec
+install: rockspecs/lume-$(ROCKSPEC_VERSION).rockspec
+	luarocks make $? --local
 
 clean: 
 	rm -f luacov.*.out
@@ -51,7 +51,9 @@ CHANGELOG.md:
 rockspecs/lume-$(ROCKSPEC_VERSION).rockspec:
 	sed -E -e 's/^version.+/version = "$(ROCKSPEC_VERSION)"/' -e 's/tag = .+/tag = "$(FAKE_GIT_VERSION)"/' $$(find rockspecs -name "lume*.rockspec" | tail -n1) > $@
 
-rock: rockspecs/lume-$(ROCKSPEC_VERSION).rockspec 
+rock: lume-$(ROCKSPEC_VERSION).src.rock 
+
+lume-$(ROCKSPEC_VERSION).src.rock: rockspecs/lume-$(ROCKSPEC_VERSION).rockspec 
 	luarocks pack $?
 
 release: lint docs CHANGELOG.md
