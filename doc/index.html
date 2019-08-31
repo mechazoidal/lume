@@ -1,0 +1,2752 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Math">Math </a></li>
+<li><a href="#Random">Random </a></li>
+<li><a href="#Tables">Tables </a></li>
+<li><a href="#Higher_order_functions">Higher-order functions </a></li>
+<li><a href="#String">String </a></li>
+<li><a href="#Miscellaneous">Miscellaneous </a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><strong>lume</strong></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>lume</code></h1>
+<p>A collection of functions for Lua, geared towards game development.</p>
+<p>
+
+</p>
+    <h3>Info:</h3>
+    <ul>
+        <li><strong>Copyright</strong>: 2018</li>
+        <li><strong>License</strong>: MIT</li>
+        <li><strong>Author</strong>: rxi</li>
+    </ul>
+
+
+<h2><a href="#Math">Math </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#angle">angle (x1, y1, x2, y2)</a></td>
+	<td class="summary">Returns the angle between the two points.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#clamp">clamp (x, min, max)</a></td>
+	<td class="summary">Returns the number <code>x</code> clamped between the numbers <code>min</code> and <code>max</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#distance">distance (x1, y1, x2, y2[, squared])</a></td>
+	<td class="summary">Returns the distance between the two points.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#lerp">lerp (a, b, amount)</a></td>
+	<td class="summary">Returns the linearly interpolated number between <code>a</code> and <code>b</code>, <code>amount</code> should
+ be in the range of 0 - 1; if <code>amount</code> is outside of this range it is clamped.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#pingpong">pingpong (x)</a></td>
+	<td class="summary">Ping-pongs the number <code>x</code> between 0 and 1.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#round">round (x[, increment])</a></td>
+	<td class="summary">Rounds <code>x</code> to the nearest integer;
+ rounds away from zero if we're midway between two integers.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#sign">sign (x)</a></td>
+	<td class="summary">Returns <code>1</code> if <code>x</code> is 0 or above, returns <code>-1</code> when <code>x</code> is negative.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#smooth">smooth (a, b, amount)</a></td>
+	<td class="summary">Similar to <code>lume.lerp()</code> but uses cubic interpolation instead of linear interpolation.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#vector">vector (angle, magnitude)</a></td>
+	<td class="summary">Given an <a href="index.html#angle">angle</a> and <code>magnitude</code>, returns a vector.</td>
+	</tr>
+</table>
+<h2><a href="#Random">Random </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#random">random ([a[, b]])</a></td>
+	<td class="summary">Returns a random number between <code>a</code> and <code>b</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#randomchoice">randomchoice (t)</a></td>
+	<td class="summary">Returns a random value from array <code>t</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#weightedchoice">weightedchoice (t)</a></td>
+	<td class="summary">Takes the argument table <code>t</code> where the keys are the possible choices and the value is the choice's weight.</td>
+	</tr>
+</table>
+<h2><a href="#Tables">Tables </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#all">all (t[, fn])</a></td>
+	<td class="summary">Returns true if all the values in <code>t</code> table are true.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#any">any (t[, fn])</a></td>
+	<td class="summary">Returns true if any of the values in <code>t</code> table are true.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#array">array (...)</a></td>
+	<td class="summary">Iterates the supplied iterator and returns an array filled with the values.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#clear">clear (t)</a></td>
+	<td class="summary">Nils all the values in the table <code>t</code>, this renders the table empty.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#clone">clone (t)</a></td>
+	<td class="summary">Returns a shallow copy of the table <code>t</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#concat">concat (...)</a></td>
+	<td class="summary">Returns a new array consisting of all the given arrays concatenated into one.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#count">count (t[, fn])</a></td>
+	<td class="summary">Counts the number of values in the table <code>t</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#each">each (t, fn, ...)</a></td>
+	<td class="summary">Iterates the table <code>t</code> and calls the function <a href="index.html#fn">fn</a> on each value followed by the supplied additional arguments
+ If <a href="index.html#fn">fn</a> is a string the method of that name is called for each value.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#extend">extend (t, ...)</a></td>
+	<td class="summary">Copies all the fields from the source tables to the table <code>t</code> and returns <code>t</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#filter">filter (t, fn[, retainkeys])</a></td>
+	<td class="summary">Calls <a href="index.html#fn">fn</a> on each value of <code>t</code> table.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#find">find (t, value)</a></td>
+	<td class="summary">Returns the index/key of <code>value</code> in <code>t</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#first">first (t[, n])</a></td>
+	<td class="summary">Returns the first element of an array or nil if the array is empty.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#invert">invert (t)</a></td>
+	<td class="summary">Returns a copy of the table where the keys have become the values and the values the keys.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#isarray">isarray (x)</a></td>
+	<td class="summary">Returns <code>true</code> if <code>x</code> is an array.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#keys">keys (t)</a></td>
+	<td class="summary">Returns an array containing each key of the table.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#last">last (t[, n])</a></td>
+	<td class="summary">Returns the last element of an array or nil if the array is empty.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#map">map (t, fn)</a></td>
+	<td class="summary">Applies the function <a href="index.html#fn">fn</a> to each value in table <code>t</code> and returns a new table with the resulting values.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#match">match (t, fn)</a></td>
+	<td class="summary">Returns the value and key of the value in table <code>t</code> which returns true when <a href="index.html#fn">fn</a> is called on it.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#merge">merge (...)</a></td>
+	<td class="summary">Returns a new table with all the given tables merged together.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#pick">pick (t, ...)</a></td>
+	<td class="summary">Returns a copy of the table filtered to only contain values for the given keys.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#push">push (t, ...)</a></td>
+	<td class="summary">Pushes all the given values to the end of the table <code>t</code> and returns the pushed values.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#reduce">reduce (t, fn[, first])</a></td>
+	<td class="summary">Applies <a href="index.html#fn">fn</a> on two arguments cumulative to the items of the array <code>t</code>, from left to right, so as to reduce the
+ array to a single value.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#reject">reject (t, fn[, retainkeys])</a></td>
+	<td class="summary">The opposite of <code>lume.filter()</code>: Calls <a href="index.html#fn">fn</a> on each value of <code>t</code> table; returns a new table with only
+ the values where <a href="index.html#fn">fn</a> returned false.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#remove">remove (t, x)</a></td>
+	<td class="summary">Removes the first instance of the value <code>x</code> if it exists in the table <code>t</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#shuffle">shuffle (t)</a></td>
+	<td class="summary">Returns a shuffled copy of the array <code>t</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#slice">slice (t[, i[, j]])</a></td>
+	<td class="summary">Mimics the behaviour of Lua's <a href="https://www.lua.org/manual/5.3/manual.html#pdf-string.sub">string.sub</a>, but operates on an array rather than a string.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#sort">sort (t[, comp])</a></td>
+	<td class="summary">Returns a copy of the array <code>t</code> with all its items sorted.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#unique">unique (t)</a></td>
+	<td class="summary">Returns a copy of the <code>t</code> array with all the duplicate values removed.</td>
+	</tr>
+</table>
+<h2><a href="#Higher_order_functions">Higher-order functions </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#call">call (fn, ...)</a></td>
+	<td class="summary">Calls the given function with the provided arguments and returns its values.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#combine">combine (...)</a></td>
+	<td class="summary">Creates a wrapper function which calls each supplied argument in the order they were passed to <code>lume.combine()</code>;
+ nil arguments are ignored.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fn">fn (fn, ...)</a></td>
+	<td class="summary">Creates a wrapper function around function <a href="index.html#fn">fn</a>, automatically inserting the arguments into <a href="index.html#fn">fn</a> which will
+ persist every time the wrapper is called.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#lambda">lambda (str)</a></td>
+	<td class="summary">Takes a string lambda and returns a function.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#memoize">memoize (fn)</a></td>
+	<td class="summary">Returns a wrapper function to <a href="index.html#fn">fn</a> where the results for any given set of arguments are cached.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#once">once (fn, ...)</a></td>
+	<td class="summary">Returns a wrapper function to <a href="index.html#fn">fn</a> which takes the supplied arguments.</td>
+	</tr>
+</table>
+<h2><a href="#String">String </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#deserialize">deserialize (str)</a></td>
+	<td class="summary">Deserializes a string created by <code>lume.serialize()</code> and returns the resulting value.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#format">format (str[, vars])</a></td>
+	<td class="summary">Returns a formatted string.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#serialize">serialize (x)</a></td>
+	<td class="summary">Serializes the argument <code>x</code> into a string which can be loaded again using <code>lume.deserialize()</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#split">split (str[, sep])</a></td>
+	<td class="summary">Returns an array of the words in the string <code>str</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#trim">trim (str[, chars])</a></td>
+	<td class="summary">Trims the whitespace from the start and end of the string <code>str</code> and returns the new string.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#wordwrap">wordwrap (str[, limit=72])</a></td>
+	<td class="summary">Returns <code>str</code> wrapped to <code>limit</code> number of characters per line, by default <code>limit</code> is <code>72</code>.</td>
+	</tr>
+</table>
+<h2><a href="#Miscellaneous">Miscellaneous </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#chain">chain (value)</a></td>
+	<td class="summary">Returns a wrapped object which allows chaining of lume functions.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#color">color (str[, mul])</a></td>
+	<td class="summary">Takes color string <code>str</code> and returns 4 values, one for each color channel (<code>r</code>, <code>g</code>, <code>b</code> and <code>a</code>).</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#dostring">dostring (str)</a></td>
+	<td class="summary">Executes the lua code inside <code>str</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#hotswap">hotswap (modname)</a></td>
+	<td class="summary">Reloads an already loaded module in place, allowing you to immediately see the effects of code changes without
+ having to restart the program.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ripairs">ripairs (t)</a></td>
+	<td class="summary">Performs the same function as <code>ipairs()</code> but iterates in reverse; this allows the removal of items from the table
+ during iteration without any items being skipped.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#time">time (fn, ...)</a></td>
+	<td class="summary">Inserts the arguments into function <a href="index.html#fn">fn</a> and calls it.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#trace">trace (...)</a></td>
+	<td class="summary">Prints the current filename and line number followed by each argument separated by a space.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#uuid">uuid ()</a></td>
+	<td class="summary">Generates a random UUID string; version 4 as specified in <a href="http://www.ietf.org/rfc/rfc4122.txt">RFC 4122</a>.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Math"></a>Math </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "angle"></a>
+    <strong>angle (x1, y1, x2, y2)</strong>
+    </dt>
+    <dd>
+    Returns the angle between the two points.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">x1</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">y1</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">x2</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">y2</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "clamp"></a>
+    <strong>clamp (x, min, max)</strong>
+    </dt>
+    <dd>
+    Returns the number <code>x</code> clamped between the numbers <code>min</code> and <code>max</code>.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">min</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">max</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "distance"></a>
+    <strong>distance (x1, y1, x2, y2[, squared])</strong>
+    </dt>
+    <dd>
+    Returns the distance between the two points.  If <code>squared</code> is true then the
+ squared distance is returned -- this is faster to calculate and can still be used when comparing distances.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">x1</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">y1</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">x2</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">y2</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">squared</span>
+            <span class="types"><span class="type">bool</span></span>
+
+
+
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        distance between (<code>x1</code>,<code>y1</code>) and (<code>x2</code>,<code>y2</code>)</li>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        squared distance between (<code>x1</code>,<code>y1</code>) and (<code>x2</code>,<code>y2</code>), if <code>squared</code> is true</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "lerp"></a>
+    <strong>lerp (a, b, amount)</strong>
+    </dt>
+    <dd>
+    Returns the linearly interpolated number between <code>a</code> and <code>b</code>, <code>amount</code> should
+ be in the range of 0 - 1; if <code>amount</code> is outside of this range it is clamped.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">a</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">b</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">amount</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+
+
+
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">lume.lerp(<span class="number">100</span>, <span class="number">200</span>, .<span class="number">5</span>) <span class="comment">-- Returns 150</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "pingpong"></a>
+    <strong>pingpong (x)</strong>
+    </dt>
+    <dd>
+    Ping-pongs the number <code>x</code> between 0 and 1.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "round"></a>
+    <strong>round (x[, increment])</strong>
+    </dt>
+    <dd>
+    Rounds <code>x</code> to the nearest integer;
+ rounds away from zero if we're midway between two integers.
+ If <code>increment</code> is set then the number is rounded to the nearest increment.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">increment</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><span class="type">int</span></span>
+
+
+</li>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        if increment is set</li>
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <li><pre class="example">lume.round(<span class="number">2.3</span>) <span class="comment">-- Returns 2</span></pre></li>
+        <li><pre class="example">lume.round(<span class="number">123.4567</span>, .<span class="number">1</span>) <span class="comment">-- Returns 123.5</span></pre></li>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "sign"></a>
+    <strong>sign (x)</strong>
+    </dt>
+    <dd>
+    Returns <code>1</code> if <code>x</code> is 0 or above, returns <code>-1</code> when <code>x</code> is negative.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+        1 if <code>x</code> >= 0</li>
+        <li>
+        0 if <code>x</code> &lt; 0</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "smooth"></a>
+    <strong>smooth (a, b, amount)</strong>
+    </dt>
+    <dd>
+    Similar to <code>lume.lerp()</code> but uses cubic interpolation instead of linear interpolation.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">a</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">b</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">amount</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+
+
+
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="index.html#lerp">lerp</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "vector"></a>
+    <strong>vector (angle, magnitude)</strong>
+    </dt>
+    <dd>
+    Given an <a href="index.html#angle">angle</a> and <code>magnitude</code>, returns a vector.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">angle</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">magnitude</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+
+
+
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> x, y = lume.vector(<span class="number">0</span>, <span class="number">10</span>) <span class="comment">-- Returns 10, 0</span></pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Random"></a>Random </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "random"></a>
+    <strong>random ([a[, b]])</strong>
+    </dt>
+    <dd>
+    Returns a random number between <code>a</code> and <code>b</code>.  If only <code>a</code> is supplied a number between <code>0</code> and <code>a</code> is returned.
+ If no arguments are supplied a random number between <code>0</code> and <code>1</code> is returned.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">a</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">b</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        Random number between 0 and 1</li>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        Random number between 0 and <code>b</code></li>
+        <li>
+           <span class="types"><span class="type">number</span></span>
+        Random number between <code>a</code> and <code>b</code></li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "randomchoice"></a>
+    <strong>randomchoice (t)</strong>
+    </dt>
+    <dd>
+    Returns a random value from array <code>t</code>.  If the array is empty an error is raised.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        random value from <code>t</code>
+    </ol>
+
+    <h3>Raises:</h3>
+    If t is empty
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">lume.randomchoice({<span class="keyword">true</span>, <span class="keyword">false</span>}) <span class="comment">-- Returns either true or false</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "weightedchoice"></a>
+    <strong>weightedchoice (t)</strong>
+    </dt>
+    <dd>
+    Takes the argument table <code>t</code> where the keys are the possible choices and the value is the choice's weight.
+ A weight should be 0 or above, the larger the number the higher the probability of that choice being picked.
+ If the table is empty, a weight is below zero or all the weights are 0 then an error is raised.
+ Returns either "cat" or "dog" with "cat" being twice as likely to be chosen.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        random value from <code>t</code>
+    </ol>
+
+    <h3>Raises:</h3>
+    If t is empty
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">lume.weightedchoice({ [<span class="string">"cat"</span>] = <span class="number">10</span>, [<span class="string">"dog"</span>] = <span class="number">5</span>, [<span class="string">"frog"</span>] = <span class="number">0</span> })</pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Tables"></a>Tables </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "all"></a>
+    <strong>all (t[, fn])</strong>
+    </dt>
+    <dd>
+    Returns true if all the values in <code>t</code> table are true.  If a <a href="index.html#fn">fn</a> function is supplied it is called on each value,
+ true is returned if all of the calls to <a href="index.html#fn">fn</a> return true.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">fn</span>
+            <span class="types"><span class="type">function</span></span>
+
+
+
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+
+
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">lume.all({<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>}, <span class="keyword">function</span>(x) <span class="keyword">return</span> x == <span class="number">1</span> <span class="keyword">end</span>) <span class="comment">-- Returns false</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "any"></a>
+    <strong>any (t[, fn])</strong>
+    </dt>
+    <dd>
+    Returns true if any of the values in <code>t</code> table are true.  If a <a href="index.html#fn">fn</a> function is supplied it is called on each value,
+ true is returned if any of the calls to <a href="index.html#fn">fn</a> return true.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">fn</span>
+            <span class="types"><span class="type">function</span></span>
+
+
+
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+
+
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">lume.any({<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>}, <span class="keyword">function</span>(x) <span class="keyword">return</span> x == <span class="number">1</span> <span class="keyword">end</span>) <span class="comment">-- Returns true</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "array"></a>
+    <strong>array (...)</strong>
+    </dt>
+    <dd>
+    Iterates the supplied iterator and returns an array filled with the values.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">...</span>
+            <span class="types"><span class="type">function</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">lume.array(<span class="global">string</span>.gmatch(<span class="string">"Hello world"</span>, <span class="string">"%a+"</span>)) <span class="comment">-- Returns {"Hello", "world"}</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "clear"></a>
+    <strong>clear (t)</strong>
+    </dt>
+    <dd>
+    Nils all the values in the table <code>t</code>, this renders the table empty.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        t
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> t = { <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> }
+lume.clear(t) <span class="comment">-- <code>t</code> becomes {}</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "clone"></a>
+    <strong>clone (t)</strong>
+    </dt>
+    <dd>
+    Returns a shallow copy of the table <code>t</code>.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+        shallow copy
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "concat"></a>
+    <strong>concat (...)</strong>
+    </dt>
+    <dd>
+    Returns a new array consisting of all the given arrays concatenated into one.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">...</span>
+         arguments
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">lume.concat({<span class="number">1</span>, <span class="number">2</span>}, {<span class="number">3</span>, <span class="number">4</span>}, {<span class="number">5</span>, <span class="number">6</span>}) <span class="comment">-- Returns {1, 2, 3, 4, 5, 6}</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "count"></a>
+    <strong>count (t[, fn])</strong>
+    </dt>
+    <dd>
+    Counts the number of values in the table <code>t</code>.  If a <a href="index.html#fn">fn</a> function is supplied it is called on each value,
+ the number of times it returns true is counted.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">fn</span>
+            <span class="types"><span class="type">function</span></span>
+
+
+
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+
+
+
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <li><pre class="example">lume.count({a = <span class="number">2</span>, b = <span class="number">3</span>, c = <span class="number">4</span>, d = <span class="number">5</span>}) <span class="comment">-- Returns 4</span></pre></li>
+        <li><pre class="example">lume.count({<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>}, <span class="keyword">function</span>(x) <span class="keyword">return</span> x % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">end</span>) <span class="comment">-- Returns 3</span></pre></li>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "each"></a>
+    <strong>each (t, fn, ...)</strong>
+    </dt>
+    <dd>
+    Iterates the table <code>t</code> and calls the function <a href="index.html#fn">fn</a> on each value followed by the supplied additional arguments
+ If <a href="index.html#fn">fn</a> is a string the method of that name is called for each value.  The function returns <code>t</code> unmodified.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">fn</span>
+            <span class="types"><span class="type">func</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">...</span>
+         arguments
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+        t
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <li><pre class="example">lume.each({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>}, <span class="global">print</span>) <span class="comment">-- Prints "1", "2", "3" on separate lines</span></pre></li>
+        <li><pre class="example">lume.each({a, b, c}, <span class="string">"move"</span>, <span class="number">10</span>, <span class="number">20</span>) <span class="comment">-- Does x:move(10, 20) on each value</span></pre></li>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "extend"></a>
+    <strong>extend (t, ...)</strong>
+    </dt>
+    <dd>
+    Copies all the fields from the source tables to the table <code>t</code> and returns <code>t</code>.
+ If a key exists in multiple tables the right-most table's value is used.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">...</span>
+         arguments
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+        Updated table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> t = { a = <span class="number">1</span>, b = <span class="number">2</span> }
+lume.extend(t, { b = <span class="number">4</span>, c = <span class="number">6</span> }) <span class="comment">-- <code>t</code> becomes { a = 1, b = 4, c = 6 }</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "filter"></a>
+    <strong>filter (t, fn[, retainkeys])</strong>
+    </dt>
+    <dd>
+    Calls <a href="index.html#fn">fn</a> on each value of <code>t</code> table.  Returns a new table with only the values where <a href="index.html#fn">fn</a> returned true.
+ If <code>retainkeys</code> is true the table is not treated as an array and retains its original keys.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">fn</span>
+            <span class="types"><span class="type">function</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">retainkeys</span>
+            <span class="types"><span class="type">bool</span></span>
+
+
+
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="index.html#reject">reject</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">lume.filter({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>}, <span class="keyword">function</span>(x) <span class="keyword">return</span> x % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">end</span>) <span class="comment">-- Returns {2, 4}</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "find"></a>
+    <strong>find (t, value)</strong>
+    </dt>
+    <dd>
+    Returns the index/key of <code>value</code> in <code>t</code>.  Returns <code>nil</code> if that value does not exist in the table.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">value</span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+        index/key</li>
+        <li>
+           <span class="types"><span class="type">nil</span></span>
+
+
+</li>
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">lume.find({<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>}, <span class="string">"b"</span>) <span class="comment">-- Returns 2</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "first"></a>
+    <strong>first (t[, n])</strong>
+    </dt>
+    <dd>
+    Returns the first element of an array or nil if the array is empty.
+ If <code>n</code> is specified an array of the first <code>n</code> elements is returned.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">n</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+        element</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+        if n</li>
+        <li>
+           <span class="types"><span class="type">nil</span></span>
+        if empty</li>
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">lume.first({<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>}) <span class="comment">-- Returns "a"</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "invert"></a>
+    <strong>invert (t)</strong>
+    </dt>
+    <dd>
+    Returns a copy of the table where the keys have become the values and the values the keys.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+        copy of <code>t</code>
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">lume.invert({a = <span class="string">"x"</span>, b = <span class="string">"y"</span>}) <span class="comment">-- returns {x = "a", y = "b"}</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "isarray"></a>
+    <strong>isarray (x)</strong>
+    </dt>
+    <dd>
+    Returns <code>true</code> if <code>x</code> is an array.
+ The value <code>x</code> is assumed to be an array if it is a table which contains a value at the index <code>1</code>.</p>
+
+<p> This function is used internally and can be overridden if you wish to use a different method to detect arrays.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "keys"></a>
+    <strong>keys (t)</strong>
+    </dt>
+    <dd>
+    Returns an array containing each key of the table.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "last"></a>
+    <strong>last (t[, n])</strong>
+    </dt>
+    <dd>
+    Returns the last element of an array or nil if the array is empty.
+ If <code>n</code> is specified an array of the last <code>n</code> elements is returned.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">n</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+        element</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+        if n</li>
+        <li>
+           <span class="types"><span class="type">nil</span></span>
+        if empty</li>
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">lume.last({<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>}) <span class="comment">-- Returns "c"</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "map"></a>
+    <strong>map (t, fn)</strong>
+    </dt>
+    <dd>
+    Applies the function <a href="index.html#fn">fn</a> to each value in table <code>t</code> and returns a new table with the resulting values.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">fn</span>
+            <span class="types"><span class="type">function</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">lume.map({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>}, <span class="keyword">function</span>(x) <span class="keyword">return</span> x * <span class="number">2</span> <span class="keyword">end</span>) <span class="comment">-- Returns {2, 4, 6}</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "match"></a>
+    <strong>match (t, fn)</strong>
+    </dt>
+    <dd>
+    Returns the value and key of the value in table <code>t</code> which returns true when <a href="index.html#fn">fn</a> is called on it.
+ Returns <code>nil</code> if no such value exists.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">fn</span>
+            <span class="types"><span class="type">function</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+        index/key</li>
+        <li>
+           <span class="types"><span class="type">nil</span></span>
+
+
+</li>
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">lume.match({<span class="number">1</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">7</span>}, <span class="keyword">function</span>(x) <span class="keyword">return</span> x % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">end</span>) <span class="comment">-- Returns 8, 3</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "merge"></a>
+    <strong>merge (...)</strong>
+    </dt>
+    <dd>
+    Returns a new table with all the given tables merged together.
+ If a key exists in multiple tables the right-most table's value is used.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">...</span>
+         arguments
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">lume.merge({a=<span class="number">1</span>, b=<span class="number">2</span>, c=<span class="number">3</span>}, {c=<span class="number">8</span>, d=<span class="number">9</span>}) <span class="comment">-- Returns {a=1, b=2, c=8, d=9}</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "pick"></a>
+    <strong>pick (t, ...)</strong>
+    </dt>
+    <dd>
+    Returns a copy of the table filtered to only contain values for the given keys.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">...</span>
+         arguments
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">lume.pick({ a = <span class="number">1</span>, b = <span class="number">2</span>, c = <span class="number">3</span> }, <span class="string">"a"</span>, <span class="string">"c"</span>) <span class="comment">-- Returns { a = 1, c = 3 }</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "push"></a>
+    <strong>push (t, ...)</strong>
+    </dt>
+    <dd>
+    Pushes all the given values to the end of the table <code>t</code> and returns the pushed values.  Nil values are ignored.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">...</span>
+         arguments
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> t = { <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> }
+lume.push(t, <span class="number">4</span>, <span class="number">5</span>) <span class="comment">-- <code>t</code> becomes { 1, 2, 3, 4, 5 }</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "reduce"></a>
+    <strong>reduce (t, fn[, first])</strong>
+    </dt>
+    <dd>
+    Applies <a href="index.html#fn">fn</a> on two arguments cumulative to the items of the array <code>t</code>, from left to right, so as to reduce the
+ array to a single value.  If a <a href="index.html#first">first</a> value is specified the accumulator is initialised to this, otherwise
+ the first value in the array is used. If the array is empty and no <a href="index.html#first">first</a> value is specified an error is raised.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">fn</span>
+            <span class="types"><span class="type">function</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">first</span>
+
+
+
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">lume.reduce({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>}, <span class="keyword">function</span>(a, b) <span class="keyword">return</span> a + b <span class="keyword">end</span>) <span class="comment">-- Returns 6</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "reject"></a>
+    <strong>reject (t, fn[, retainkeys])</strong>
+    </dt>
+    <dd>
+    The opposite of <code>lume.filter()</code>: Calls <a href="index.html#fn">fn</a> on each value of <code>t</code> table; returns a new table with only
+ the values where <a href="index.html#fn">fn</a> returned false.
+ If <code>retainkeys</code> is true the table is not treated as an array and retains its original keys.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">fn</span>
+            <span class="types"><span class="type">function</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">retainkeys</span>
+            <span class="types"><span class="type">bool</span></span>
+
+
+
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="index.html#filter">filter</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">lume.reject({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>}, <span class="keyword">function</span>(x) <span class="keyword">return</span> x % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">end</span>) <span class="comment">-- Returns {1, 3}</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "remove"></a>
+    <strong>remove (t, x)</strong>
+    </dt>
+    <dd>
+    Removes the first instance of the value <code>x</code> if it exists in the table <code>t</code>.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">x</span>
+         value
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+        updated table
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> t = { <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> }
+lume.remove(t, <span class="number">2</span>) <span class="comment">-- <code>t</code> becomes { 1, 3 }</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "shuffle"></a>
+    <strong>shuffle (t)</strong>
+    </dt>
+    <dd>
+    Returns a shuffled copy of the array <code>t</code>.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "slice"></a>
+    <strong>slice (t[, i[, j]])</strong>
+    </dt>
+    <dd>
+    Mimics the behaviour of Lua's <a href="https://www.lua.org/manual/5.3/manual.html#pdf-string.sub">string.sub</a>, but operates on an array rather than a string.
+ Creates and returns a new array of the given slice.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">i</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">j</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://www.lua.org/manual/5.3/manual.html#pdf-string.sub">string.sub</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">lume.slice({<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="string">"d"</span>, <span class="string">"e"</span>}, <span class="number">2</span>, <span class="number">4</span>) <span class="comment">-- Returns {"b", "c", "d"}</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "sort"></a>
+    <strong>sort (t[, comp])</strong>
+    </dt>
+    <dd>
+    Returns a copy of the array <code>t</code> with all its items sorted.
+ If <code>comp</code> is a function it will be used to compare the items when sorting.
+ If <code>comp</code> is a string it will be used as the key to sort the items by.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">comp</span>
+            <span class="types"><span class="type">func</span> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
+
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+        t
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <li><pre class="example">lume.sort({ <span class="number">1</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">5</span> }) <span class="comment">-- Returns { 1, 2, 3, 4, 5 }</span></pre></li>
+        <li><pre class="example">lume.sort({ {z=<span class="number">2</span>}, {z=<span class="number">3</span>}, {z=<span class="number">1</span>} }, <span class="string">"z"</span>) <span class="comment">-- Returns { {z=1}, {z=2}, {z=3} }</span></pre></li>
+        <li><pre class="example">lume.sort({ <span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span> }, <span class="keyword">function</span>(a, b) <span class="keyword">return</span> a &gt; b <span class="keyword">end</span>) <span class="comment">-- Returns { 3, 2, 1 }</span></pre></li>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "unique"></a>
+    <strong>unique (t)</strong>
+    </dt>
+    <dd>
+    Returns a copy of the <code>t</code> array with all the duplicate values removed.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">lume.unique({<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="string">"cat"</span>, <span class="string">"cat"</span>}) <span class="comment">-- Returns {1, 2, "cat"}</span></pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Higher_order_functions"></a>Higher-order functions </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "call"></a>
+    <strong>call (fn, ...)</strong>
+    </dt>
+    <dd>
+    Calls the given function with the provided arguments and returns its values.  If <a href="index.html#fn">fn</a> is <code>nil</code> then
+ no action is performed and the function returns <code>nil</code>.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">fn</span>
+            <span class="types"><span class="type">function</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">...</span>
+         arguments
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+        ...</li>
+        <li>
+        nil if fn is nil</li>
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">lume.call(<span class="global">print</span>, <span class="string">"Hello world"</span>) <span class="comment">-- Prints "Hello world"</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "combine"></a>
+    <strong>combine (...)</strong>
+    </dt>
+    <dd>
+    Creates a wrapper function which calls each supplied argument in the order they were passed to <code>lume.combine()</code>;
+ nil arguments are ignored.  The wrapper function passes its own arguments to each of its wrapped functions
+ when it is called.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">...</span>
+         arguments
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">function</span></span>
+        wrapper function
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> f = lume.combine(<span class="keyword">function</span>(a, b) <span class="global">print</span>(a + b) <span class="keyword">end</span>,
+                       <span class="keyword">function</span>(a, b) <span class="global">print</span>(a * b) <span class="keyword">end</span>)
+f(<span class="number">3</span>, <span class="number">4</span>) <span class="comment">-- Prints "7" then "12" on a new line</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "fn"></a>
+    <strong>fn (fn, ...)</strong>
+    </dt>
+    <dd>
+    Creates a wrapper function around function <a href="index.html#fn">fn</a>, automatically inserting the arguments into <a href="index.html#fn">fn</a> which will
+ persist every time the wrapper is called.  Any arguments which are passed to the returned function will be
+ inserted after the already existing arguments passed to <a href="index.html#fn">fn</a>.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">fn</span>
+            <span class="types"><span class="type">function</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">...</span>
+         arguments
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">func</span></span>
+
+
+
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> f = lume.fn(<span class="global">print</span>, <span class="string">"Hello"</span>)
+f(<span class="string">"world"</span>) <span class="comment">-- Prints "Hello world"</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "lambda"></a>
+    <strong>lambda (str)</strong>
+    </dt>
+    <dd>
+    Takes a string lambda and returns a function.  <code>str</code> should be a list of comma-separated parameters,
+ followed by <code>-&gt;</code>, followed by the expression which will be evaluated and returned.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+         list of comma-separate parameters
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">func</span></span>
+
+
+
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> f = lume.lambda <span class="string">"x,y -&gt; 2*x+y"</span>
+f(<span class="number">10</span>, <span class="number">5</span>) <span class="comment">-- Returns 25</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "memoize"></a>
+    <strong>memoize (fn)</strong>
+    </dt>
+    <dd>
+    Returns a wrapper function to <a href="index.html#fn">fn</a> where the results for any given set of arguments are cached.
+ <code>lume.memoize()</code> is useful when used on functions with slow-running computations.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">fn</span>
+            <span class="types"><span class="type">function</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">func</span></span>
+
+
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "once"></a>
+    <strong>once (fn, ...)</strong>
+    </dt>
+    <dd>
+    Returns a wrapper function to <a href="index.html#fn">fn</a> which takes the supplied arguments.  The wrapper function will call <a href="index.html#fn">fn</a> on
+ the first call and do nothing on any subsequent calls.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">fn</span>
+            <span class="types"><span class="type">function</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">...</span>
+         arguments
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">func</span></span>
+
+
+
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> f = lume.once(<span class="global">print</span>, <span class="string">"Hello"</span>)
+() <span class="comment">-- Prints "Hello"
+</span>() <span class="comment">-- Does nothing</span></pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="String"></a>String </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "deserialize"></a>
+    <strong>deserialize (str)</strong>
+    </dt>
+    <dd>
+    Deserializes a string created by <code>lume.serialize()</code> and returns the resulting value.  This function should not
+ be run on an untrusted string.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        ... resulting value
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="index.html#serialize">serialize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">lume.deserialize(<span class="string">"{1, 2, 3}"</span>) <span class="comment">-- Returns {1, 2, 3}</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "format"></a>
+    <strong>format (str[, vars])</strong>
+    </dt>
+    <dd>
+    Returns a formatted string.  The values of keys in the table <code>vars</code> can be inserted into the string by using
+ the form <code>&quot;{key}&quot;</code> in <code>str</code>; numerical keys can also be used.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">vars</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
+
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <li><pre class="example">lume.format(<span class="string">"{b} hi {a}"</span>, {a = <span class="string">"mark"</span>, b = <span class="string">"Oh"</span>}) <span class="comment">-- Returns "Oh hi mark"</span></pre></li>
+        <li><pre class="example">lume.format(<span class="string">"Hello {1}!"</span>, {<span class="string">"world"</span>}) <span class="comment">-- Returns "Hello world!"</span></pre></li>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "serialize"></a>
+    <strong>serialize (x)</strong>
+    </dt>
+    <dd>
+    Serializes the argument <code>x</code> into a string which can be loaded again using <code>lume.deserialize()</code>.  Only booleans,
+ numbers, tables and strings can be serialized. Circular references will result in an error;
+ all nested tables are serialized as unique tables.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">bool</span>, <span class="type">number</span>, <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a> or <a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+        serialized string
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="index.html#deserialize">deserialize</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">lume.serialize({a = <span class="string">"test"</span>, b = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>}, <span class="keyword">false</span>})
+ <span class="comment">-- Returns "{[1]=false,["a"]="test",["b"]={[1]=1,[2]=2,[3]=3,},}"</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "split"></a>
+    <strong>split (str[, sep])</strong>
+    </dt>
+    <dd>
+    Returns an array of the words in the string <code>str</code>.  If <code>sep</code> is provided it is used as the delimiter,
+ consecutive delimiters are not grouped together and will delimit empty strings.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">sep</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
+
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+        words
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <li><pre class="example">lume.split(<span class="string">"One two three"</span>) <span class="comment">-- Returns {"One", "two", "three"}</span></pre></li>
+        <li><pre class="example">lume.split(<span class="string">"a,b,,c"</span>, <span class="string">","</span>) <span class="comment">-- Returns {"a", "b", "", "c"}</span></pre></li>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "trim"></a>
+    <strong>trim (str[, chars])</strong>
+    </dt>
+    <dd>
+    Trims the whitespace from the start and end of the string <code>str</code> and returns the new string.  If a <code>chars</code> value is
+ set the characters in <code>chars</code> are trimmed instead of whitespace.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">chars</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
+
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+        trimmed string
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">lume.trim(<span class="string">"  Hello  "</span>) <span class="comment">-- Returns "Hello"</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "wordwrap"></a>
+    <strong>wordwrap (str[, limit=72])</strong>
+    </dt>
+    <dd>
+    Returns <code>str</code> wrapped to <code>limit</code> number of characters per line, by default <code>limit</code> is <code>72</code>.  <code>limit</code> can also be a
+ function which when passed a string, returns <code>true</code> if it is too long for a single line.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">limit</span>
+            <span class="types"><span class="type">number</span> or <span class="type">function</span></span>
+
+
+
+         (<em>default</em> 72)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+        wrapped string
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">lume.wordwrap(<span class="string">"Hello world. This is a short string"</span>, <span class="number">14</span>)
+ <span class="comment">-- Returns "Hello world\nThis is a\nshort string"</span></pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Miscellaneous"></a>Miscellaneous </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "chain"></a>
+    <strong>chain (value)</strong>
+    </dt>
+    <dd>
+    Returns a wrapped object which allows chaining of lume functions.  The function result() should be called
+ at the end of the chain to return the resulting value.
+ The table returned by the <a href="index.html#">lume</a> module, when called, acts in the same manner as calling chain().
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">value</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.6">table</a></span>
+
+
+
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <li><pre class="example">lume.chain({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>})
+  :filter(<span class="keyword">function</span>(x) <span class="keyword">return</span> x % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">end</span>)
+  :map(<span class="keyword">function</span>(x) <span class="keyword">return</span> -x <span class="keyword">end</span>)
+  :result() <span class="comment">-- Returns { -2, -4 }</span></pre></li>
+        <li><pre class="example">lume({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>}):each(<span class="global">print</span>) <span class="comment">-- Prints 1, 2 then 3 on separate lines</span></pre></li>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "color"></a>
+    <strong>color (str[, mul])</strong>
+    </dt>
+    <dd>
+    Takes color string <code>str</code> and returns 4 values, one for each color channel (<code>r</code>, <code>g</code>, <code>b</code> and <code>a</code>).  By default the
+ returned values are between 0 and 1; the values are multiplied by the number <code>mul</code> if it is provided.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
+
+        </li>
+        <li><span class="parameter">mul</span>
+            <span class="types"><span class="type">number</span></span>
+
+
+
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number,number,number,number</span></span>
+        r, g, b, a
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <li><pre class="example">lume.color(<span class="string">"#ff0000"</span>)               <span class="comment">-- Returns 1, 0, 0, 1</span></pre></li>
+        <li><pre class="example">lume.color(<span class="string">"rgba(255, 0, 255, .5)"</span>) <span class="comment">-- Returns 1, 0, 1, .5</span></pre></li>
+        <li><pre class="example">lume.color(<span class="string">"#00ffff"</span>, <span class="number">256</span>)          <span class="comment">-- Returns 0, 256, 256, 256</span></pre></li>
+        <li><pre class="example">lume.color(<span class="string">"rgb(255, 0, 0)"</span>, <span class="number">256</span>)   <span class="comment">-- Returns 256, 0, 0, 256</span></pre></li>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "dostring"></a>
+    <strong>dostring (str)</strong>
+    </dt>
+    <dd>
+    Executes the lua code inside <code>str</code>.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">str</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">lume.dostring(<span class="string">"print('Hello!')"</span>) <span class="comment">-- Prints "Hello!"</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "hotswap"></a>
+    <strong>hotswap (modname)</strong>
+    </dt>
+    <dd>
+    Reloads an already loaded module in place, allowing you to immediately see the effects of code changes without
+ having to restart the program.  <code>modname</code> should be the same string used when loading the module with require().
+ In the case of an error the global environment is restored and <code>nil</code> plus an error message is returned.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">modname</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#pdf-module">module</a></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#pdf-module">module</a></span>
+
+
+</li>
+        <li>
+           <span class="types"><span class="type">nil,string</span></span>
+        If an error occurs</li>
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <li><pre class="example">lume.hotswap(<span class="string">"lume"</span>) <span class="comment">-- Reloads the lume module</span></pre></li>
+        <li><pre class="example"><span class="global">assert</span>(lume.hotswap(<span class="string">"inexistant_module"</span>)) <span class="comment">-- Raises an error</span></pre></li>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "ripairs"></a>
+    <strong>ripairs (t)</strong>
+    </dt>
+    <dd>
+    Performs the same function as <code>ipairs()</code> but iterates in reverse; this allows the removal of items from the table
+ during iteration without any items being skipped.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><span class="type">function</span></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">function</span></span>
+
+
+
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="comment">-- Prints "3-&gt;c", "2-&gt;b" and "1-&gt;a" on separate lines
+</span><span class="keyword">for</span> i, v <span class="keyword">in</span> lume.ripairs({ <span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span> }) <span class="keyword">do</span>
+  <span class="global">print</span>(i .. <span class="string">"-&gt;"</span> .. v)
+<span class="keyword">end</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "time"></a>
+    <strong>time (fn, ...)</strong>
+    </dt>
+    <dd>
+    Inserts the arguments into function <a href="index.html#fn">fn</a> and calls it.  Returns the time in seconds the function <a href="index.html#fn">fn</a> took
+ to execute followed by <a href="index.html#fn">fn</a>'s returned values.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">fn</span>
+            <span class="types"><span class="type">function</span></span>
+
+
+
+        </li>
+        <li><span class="parameter">...</span>
+         arguments
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+
+
+
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">lume.time(<span class="keyword">function</span>(x) <span class="keyword">return</span> x <span class="keyword">end</span>, <span class="string">"hello"</span>) <span class="comment">-- Returns 0, "hello"</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "trace"></a>
+    <strong>trace (...)</strong>
+    </dt>
+    <dd>
+    Prints the current filename and line number followed by each argument separated by a space.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">...</span>
+         arguments
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+        current filename, line number, and arguments
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="comment">-- Assuming the file is called "example.lua" and the next line is 12:
+</span>lume.trace(<span class="string">"hello"</span>, <span class="number">1234</span>) <span class="comment">-- Prints "example.lua:12: hello 1234"</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "uuid"></a>
+    <strong>uuid ()</strong>
+    </dt>
+    <dd>
+    Generates a random UUID string; version 4 as specified in <a href="http://www.ietf.org/rfc/rfc4122.txt">RFC 4122</a>.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+        uuid
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2019-08-30 19:15:07 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
