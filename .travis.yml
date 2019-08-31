@@ -27,6 +27,7 @@ install:
 
 script:
   - lua -e "$TEST_PACKAGE_PATH" -lluacov test/test.lua
+  - luacheck --std max lume.lua
 
 after_success:
   - luacov-coveralls
