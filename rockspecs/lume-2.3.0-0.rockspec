@@ -20,5 +20,5 @@ build = {
       ["test.test"] = "test/test.lua",
       ["test.util.tester"] = "test/util/tester.lua"
    },
-   copy_directories = { "doc" }
+   copy_directories = { "docs" }
 }
