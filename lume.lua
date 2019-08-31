@@ -254,10 +254,12 @@ end
 --- Tables
 -- @section tables
 
---- Returns `true` if `x` is an array -- the value is assumed to be an array if it is a table which contains a value at the index `1`. 
+
+--- Returns `true` if `x` is an array. The value `x` is assumed to be an array if it is a table which contains a value at the index `1`.
+--
 -- This function is used internally and can be overridden if you wish to use a different method to detect arrays.
 -- @function isarray
--- @tparam table x
+-- @param x
 -- @treturn bool
 function lume.isarray(x)
   return type(x) == "table" and x[1] ~= nil
@@ -360,9 +362,9 @@ end
 -- If `comp` is a function it will be used to compare the items when sorting.
 -- If `comp` is a string it will be used as the key to sort the items by.
 -- @function sort
--- @tparam array t
+-- @tparam table t
 -- @tparam[opt] func|string comp
--- @treturn array t
+-- @treturn table t
 -- @usage lume.sort({ 1, 4, 3, 2, 5 }) -- Returns { 1, 2, 3, 4, 5 }
 -- @usage lume.sort({ {z=2}, {z=3}, {z=1} }, "z") -- Returns { {z=1}, {z=2}, {z=3} }
 -- @usage lume.sort({ 1, 3, 2 }, function(a, b) return a > b end) -- Returns { 3, 2, 1 }
@@ -692,7 +694,7 @@ end
 --- Returns a copy of the table where the keys have become the values and the values the keys.
 -- @function invert
 -- @tparam table t
--- @treturn table copy
+-- @treturn table copy of `t`
 -- @usage lume.invert({a = "x", b = "y"}) -- returns {x = "a", y = "b"}
 function lume.invert(t)
   local rtn = {}
