@@ -1,10 +1,10 @@
 --- A collection of functions for Lua, geared towards game development.
 -- @module lume
 -- @author rxi
--- @copyright 2018
+-- @copyright 2020
 -- @license MIT
 
--- Copyright (c) 2018 rxi
+-- Copyright (c) 2020 rxi
 --
 -- Permission is hereby granted, free of charge, to any person obtaining a copy of
 -- this software and associated documentation files (the "Software"), to deal in
@@ -475,8 +475,8 @@ end
 -- @treturn table
 -- @usage lume.reduce({1, 2, 3}, function(a, b) return a + b end) -- Returns 6
 function lume.reduce(t, fn, first)
+  local started = first ~= nil
   local acc = first
-  local started = first and true or false
   local iter = getiter(t)
   for _, v in iter(t) do
     if started then
